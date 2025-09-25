@@ -15,12 +15,26 @@ const Signup = () => {
         lastName,
         emailId,
         password,
+      }, {
+        withCredentials: true  // Important for cookies
       });
+      
       console.log("Signup successful:", response.data);
+      console.log("Response headers:", response.headers);
+      console.log("Document cookies after signup:", document.cookie);
+      
       alert("Account created successfully! You can now login.");
+      
+      // Optional: Clear form after successful signup
+      setFirstName("");
+      setLastName("");
+      setEmailId("");
+      setPassword("");
+      
     } catch (error) {
       console.log("Signup error:", error);
-      alert("Signup failed: " + error.response?.data || error.message);
+      console.log("Error response:", error.response?.data);
+      alert("Signup failed: " + (error.response?.data || error.message));
     }
   };
 

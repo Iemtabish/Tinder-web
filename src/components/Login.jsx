@@ -9,20 +9,44 @@ import { BASE_URL } from "../utils/constants";
 const Login = () => {
   const [emailId, setemailId] = useState(""); 
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
+      setIsLoading(true);
+      console.log("Attempting login with:", { emailId, password: "***" });
+      
       const res = await axios.post(BASE_URL + "/login", {
         emailId, 
         password,
+      }, {
+        withCredentials: true  // Important for cookies
       });
-      console.log(res.data);
+      
+      console.log("Login successful:", res.data);
+      console.log("Response headers:", res.headers);
+      console.log("Document cookies after login:", document.cookie);
+      
+      // Dispatch user data to Redux
       dispatch(addUser(res.data));
-      return navigate("/");
+      
+      // Navigate to home page
+      navigate("/");
+      
     } catch (error) {
-      console.log(error);
+      console.log("Login error:", error);
+      console.log("Error response:", error.response?.data);
+      
+      // Show user-friendly error message
+      if (error.response?.status === 400) {
+        alert("Login failed: " + (error.response?.data || "Invalid credentials"));
+      } else {
+        alert("Login failed: Please try again");
+      }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -36,11 +60,12 @@ const Login = () => {
             <fieldset className="fieldset">
               <legend className="fieldset-legend">Email ID</legend>
               <input
-                type="text"
+                type="email"
                 className="input"
                 value={emailId}
-                placeholder="Type here"
+                placeholder="Enter your email"
                 onChange={(e) => setemailId(e.target.value)}
+                disabled={isLoading}
               />
             </fieldset>
             
@@ -50,19 +75,23 @@ const Login = () => {
                 type="password"
                 className="input"
                 value={password}
-                placeholder="Type here"
+                placeholder="Enter your password"
                 onChange={(e) => setPassword(e.target.value)}
+                disabled={isLoading}
               />
             </fieldset>
           </div>
           
           <div className="card-actions justify-center">
-            <button className="btn btn-primary" onClick={handleLogin}>
-              Login
+            <button 
+              className={`btn btn-primary ${isLoading ? 'loading' : ''}`} 
+              onClick={handleLogin}
+              disabled={isLoading || !emailId || !password}
+            >
+              {isLoading ? "Logging in..." : "Login"}
             </button>
           </div>
 
-          
           <div className="text-center mt-4">
             <p>Don't have an account?</p>
             <Link to="/signup" className="text-blue-500 hover:underline">

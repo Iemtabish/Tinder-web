@@ -19,3 +19,6 @@
 - login & see if the data in coming properly in to the store
 - navbar should update as soon as user login
 - refactor out code to constants file + created a component folder
+- you should not be access to other routes without login
+- if token is not presenet, redirect to login page
+- Logout & Profile 
