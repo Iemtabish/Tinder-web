@@ -11,3 +11,11 @@
 - Created outlet in the body component
 - Created a Footer
 - Added some CSS in it through Tailwind
+- Installed Axios
+- CORS- Installed cors in backend, added middleware to with configurations: origin, credentials: true
+- Installed Redux toolkit  
+- Installed react redux & react toolkit => ConfigureStore => Provider => createSlice = add reducer to store
+- add redux dev tools in chrome
+- login & see if the data in coming properly in to the store
+- navbar should update as soon as user login
+- refactor out code to constants file + created a component folder
