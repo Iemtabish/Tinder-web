@@ -8,6 +8,7 @@ import appStore from "./utils/appStore.jsx";
 import Feed from "./components/Feed.jsx";
 import Connections from "./components/Connections.jsx";
 import Requests from "./components/Requests.jsx";
+import Matches from "./components/Matches.jsx";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
               <Route path="profile" element={<Profile />} />
               <Route path="connections" element={<Connections />} />
               <Route path="requests" element={<Requests />} />
+              <Route path="/matches" element={<Matches />} />
             </Route>
           </Routes>
         </BrowserRouter>

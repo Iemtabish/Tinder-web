@@ -74,7 +74,7 @@ const Connections = () => {
     fetchConnections();
   }, []);
 
-  if (loading) return <h1 className="text-center my-10 text-xl font-medium text-gray-700">Connections Load Ho Rahe Hain...</h1>;
+  if (loading) return <h1 className="text-center my-10 text-xl font-medium text-gray-700">Loading your connections</h1>;
 
   // Conditional Rendering
   if (!connections || connections.length === 0)
@@ -82,7 +82,7 @@ const Connections = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-center mb-8 text-pink-600">Aapke Matches</h1>
+      <h1 className="text-3xl font-bold text-center mb-8 text-pink-600">Your Connection</h1>
       
       <div className="flex flex-wrap justify-center gap-6">
         {connections.map((connection) => {
